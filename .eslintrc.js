@@ -1,5 +1,11 @@
 module.exports = {
-  plugins: ["@typescript-eslint", "eslint-comments", "promise", "unicorn"],
+  plugins: [
+    "@typescript-eslint",
+    "eslint-comments",
+    "promise",
+    "unicorn",
+    "prettier",
+  ],
   extends: [
     "airbnb-typescript",
     "plugin:@typescript-eslint/recommended",
@@ -34,5 +40,5 @@ module.exports = {
     ],
     // Common abbreviations are known and readable
     "unicorn/prevent-abbreviations": "off",
-  }
+  },
 }
