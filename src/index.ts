@@ -5,8 +5,11 @@ import express from "express"
 import bodyParser from "body-parser"
 import cors from "cors"
 import routes from "./routes"
+import { db } from "./databases"
 
-console.log(colors.yellow(`This server is running in ${process.env.NODE_ENV} mode!`))
+console.log(
+  colors.yellow(`This server is running in ${process.env.NODE_ENV} mode!`),
+)
 
 const app: express.Application = express()
 
@@ -22,4 +25,8 @@ app.get("/", (req, res) => res.send("Hi"))
 
 //listen
 let port = process.env.PORT || 3000
-app.listen(port, () => console.log(colors.green(`Server listening on port ${port}!`)))
+app.listen(port, () =>
+  console.log(
+    colors.green("Server listening on port " + colors.bold(`${port}`)),
+  ),
+)

@@ -3,6 +3,7 @@ import jwt from "jwt-simple"
 import passport from "passport"
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt"
 import colors from "colors/safe"
+import { Payload } from "../models"
 
 const router: Router = Router()
 
@@ -11,11 +12,14 @@ const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader("authorization"),
   secretOrKey: process.env.SECRET,
 }
-const jwtAuth: JwtStrategy = new JwtStrategy(jwtOptions, (payload, done) => {
-  // TODO: check sub in database
-  if (payload.sub === "meehoi") done(null, true)
-  else done(null, false)
-})
+const jwtAuth: JwtStrategy = new JwtStrategy(
+  jwtOptions,
+  (payload: Payload, done) => {
+    // TODO: check sub in database
+    if (payload.sub === "meehoi") done(null, true)
+    else done(null, false)
+  },
+)
 passport.use(jwtAuth)
 
 //login middleware
@@ -41,10 +45,10 @@ router.post(
   // return payload
   (req, res) => {
     const time = Math.trunc(Date.now() / 1000)
-    const payload = {
+    const payload: Payload = {
       sub: req.body.username,
       iat: time,
-      exp: time + process.env.TIMEOUT,
+      exp: time + +process.env.TIMEOUT,
     }
     res.send(jwt.encode(payload, process.env.SECRET))
     console.log("user " + colors.bold(req.body.username) + " is logging in.")
