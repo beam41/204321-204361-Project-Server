@@ -5,7 +5,96 @@ const sql = sqlite3.verbose()
 
 export const db = new sql.Database(process.env.DB, err => {
   if (err) console.error(err.message)
-  else console.log(colors.green("Connected to the database :)"))
+  else console.log(colors.green("[SQLite] Connected to the database :)"))
 })
 
-export default {}
+export function runDB() {
+  db.serialize(() => {
+    db.run(
+      `
+    CREATE TABLE IF NOT EXISTS ADVISOR (
+      AdvisorID   CHARACTER(9)    NOT NULL    UNIQUE,
+      AdvName     TEXT,
+      AdvSurname  TEXT,
+      Password    TEXT,
+      PRIMARY KEY (AdvisorID)
+    ) WITHOUT ROWID;
+    `,
+      err => {
+        if (err) console.log(err.message)
+      },
+    )
+    db.run(
+      `
+    CREATE TABLE IF NOT EXISTS STUDENT (
+      StudentID   CHARACTER(9)    NOT NULL    UNIQUE,
+      StdName     TEXT,
+      StdSurname  TEXT,
+      AdvisorID   CHARACTER(9)    NOT NULL    DEFAULT '000000000',
+      Password    TEXT,
+      PRIMARY KEY (StudentID),
+      FOREIGN KEY (AdvisorID)     REFERENCES  ADVISOR (AdvisorID)
+      ON DELETE   SET DEFAULT
+      ON UPDATE   CASCADE
+    )   WITHOUT ROWID;
+    `,
+      err => {
+        if (err) console.log(err.message)
+      },
+    )
+    db.run(
+      `
+    CREATE TABLE IF NOT EXISTS COURSE (
+      CourseID    CHARACTER(6)    NOT NULL    UNIQUE,
+      CourseName  TEXT,
+      CourseType  TEXT,
+      Prereq      TEXT,
+      PRIMARY KEY (CourseID)
+    )   WITHOUT ROWID;
+    `,
+      err => {
+        if (err) console.log(err.message)
+      },
+    )
+    db.run(
+      `
+    CREATE TABLE IF NOT EXISTS STDPLAN (
+      StudentID   CHARACTER(9)    NOT NULL,
+      CourseID    CHARACTER(6)    NOT NULL,
+      Year        INTEGER,
+      Term        INTEGER,
+      Grade       CHARACTER(2),
+      FOREIGN KEY (StudentID)     REFERENCES  STUDENT (StudentID)
+      FOREIGN KEY (CourseID)      REFERENCES  COURSE  (CourseID)
+      ON DELETE   CASCADE
+      ON UPDATE   CASCADE
+    );
+    `,
+      err => {
+        if (err) console.log(err.message)
+      },
+    )
+    db.run(
+      `
+    CREATE TABLE IF NOT EXISTS CHAT (
+      ChatID      CHARACTER(10)   NOT NULL    UNIQUE,
+      StudentID   CHARACTER(9)    NOT NULL,
+      AdvisorID   CHARACTER(9)    NOT NULL,
+      Time        INTEGER,
+      Message     TEXT,
+      SentBy      TEXT,
+      PRIMARY KEY (ChatID)
+      FOREIGN KEY (StudentID)     REFERENCES  STUDENT (StudentID)
+      FOREIGN KEY (AdvisorID)     REFERENCES  ADVISOR (AdvisorID)
+      ON DELETE   CASCADE
+      ON UPDATE   CASCADE
+    );
+    `,
+      err => {
+        if (err) console.log(err.message)
+      },
+    )
+  })
+}
+
+export { default as Select } from "./select"
