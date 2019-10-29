@@ -1,10 +1,10 @@
-import express, { Router } from "express"
+import { Router } from "express"
 import jwt from "jwt-simple"
 import passport from "passport"
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt"
 import colors from "colors/safe"
 import { Payload } from "../models"
-import { Select } from "../databases"
+import { compareUP, findUser, findUserType } from "../databases/select"
 
 const router: Router = Router()
 
@@ -17,7 +17,7 @@ const jwtAuth: JwtStrategy = new JwtStrategy(
   jwtOptions,
   (payload: Payload, done) => {
     // TODO: check sub in database
-    if (Select.findUser(payload.sub)) done(null, true)
+    if (findUser(payload.sub)) done(null, true)
     else done(null, false)
   },
 )
@@ -40,11 +40,11 @@ router.post(
   // login check handler
   async (req, res, next) => {
     // TODO: check with database
-    if (await Select.compareUP(req.body.username, req.body.password)) next()
+    if (await compareUP(req.body.username, req.body.password)) next()
     else res.send("Wrong username and/or password")
   },
   // return payload
-  (req, res) => {
+  async (req, res) => {
     const time = Math.trunc(Date.now() / 1000)
     const payload: Payload = {
       sub: req.body.username,
@@ -54,6 +54,8 @@ router.post(
     res.send({
       jwt: jwt.encode(payload, process.env.SECRET),
       username: req.body.username,
+      userType: await findUserType(req.body.username),
+      expireOn: time + +process.env.TIMEOUT,
     })
     console.log(
       "[Express] user " + colors.bold(req.body.username) + " is logging in.",

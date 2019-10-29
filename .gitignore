@@ -62,6 +62,10 @@ typings/
 
 # sqlite3 db
 *.db
+*.db-journal
 
 # vscode setting
 .vscode
+
+#scraped file it's very big
+course.json

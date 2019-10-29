@@ -7,6 +7,8 @@ export const db = new sql.Database(process.env.DB, err => {
   if (err) console.error(err.message)
   else console.log(colors.green("[SQLite] Connected to the database :)"))
 })
+// just in case it was turned off once
+db.exec("PRAGMA synchronous=ON")
 
 export function runDB() {
   db.serialize(() => {
@@ -45,10 +47,11 @@ export function runDB() {
     db.run(
       `
     CREATE TABLE IF NOT EXISTS COURSE (
-      CourseID    CHARACTER(6)    NOT NULL    UNIQUE,
-      CourseName  TEXT,
-      CourseType  TEXT,
-      Prereq      TEXT,
+      CourseID      CHARACTER(6)    NOT NULL    UNIQUE,
+      CourseName    TEXT,
+      CourseCredit  INTEGER,
+      CourseType    TEXT,
+      Prereq        TEXT,
       PRIMARY KEY (CourseID)
     )   WITHOUT ROWID;
     `,
@@ -65,6 +68,8 @@ export function runDB() {
       Term        INTEGER,
       Grade       CHARACTER(2),
       FOREIGN KEY (StudentID)     REFERENCES  STUDENT (StudentID)
+      ON DELETE   CASCADE
+      ON UPDATE   CASCADE
       FOREIGN KEY (CourseID)      REFERENCES  COURSE  (CourseID)
       ON DELETE   CASCADE
       ON UPDATE   CASCADE
@@ -96,5 +101,3 @@ export function runDB() {
     )
   })
 }
-
-export { default as Select } from "./select"

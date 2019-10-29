@@ -7,7 +7,9 @@
     "build": "cross-env NODE_ENV=production babel -d ./dist ./src -s",
     "serve": "cross-env NODE_ENV=production node ./dist/index.js",
     "ct": "tsc",
-    "ct:w": "tsc --watch"
+    "ct:w": "tsc --watch",
+    "scrape": "node ./src/courseScraper.js",
+    "start:scrape": "cross-env NODE_ENV=development SCRAPE=true nodemon --exec babel-node -- ./src/index.ts --extensions '.ts'"
   },
   "repository": {
     "type": "git",
@@ -56,6 +58,7 @@
     "jwt-simple": "^0.5.6",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "puppeteer": "^2.0.0",
     "sqlite3": "^4.1.0"
   }
 }
