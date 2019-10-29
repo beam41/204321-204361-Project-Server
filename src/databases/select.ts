@@ -6,7 +6,10 @@ import { Student, Advisor } from "../models"
  *
  * promise value will be true if match
  */
-export async function compareUP(username: string, password: string): Promise<boolean> {
+export async function compareUP(
+  username: string,
+  password: string,
+): Promise<boolean> {
   let found: boolean = false
   await new Promise((resolve, reject) =>
     db.get(
@@ -22,7 +25,7 @@ export async function compareUP(username: string, password: string): Promise<boo
       },
     ),
   ).then((value: Student) => {
-    if (value) found = value.StudentID === username
+    if (value) found = true
   })
   await new Promise((resolve, reject) =>
     db.get(
@@ -38,7 +41,7 @@ export async function compareUP(username: string, password: string): Promise<boo
       },
     ),
   ).then((value: Advisor) => {
-    if (value) found = value.AdvisorID === username
+    if (value && !found) found = true
   })
   return found
 }
@@ -65,7 +68,7 @@ export async function findUser(username: string): Promise<boolean> {
       },
     ),
   ).then((value: Student) => {
-    if (value) found = value.StudentID === username
+    if (value) found = true
   })
   await new Promise((resolve, reject) =>
     db.get(
@@ -80,7 +83,7 @@ export async function findUser(username: string): Promise<boolean> {
       },
     ),
   ).then((value: Advisor) => {
-    if (value) found = value.AdvisorID === username
+    if (value && !found) found = true
   })
   return found
 }

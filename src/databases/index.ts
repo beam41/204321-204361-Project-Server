@@ -23,7 +23,7 @@ export function runDB() {
     ) WITHOUT ROWID;
     `,
       err => {
-        if (err) console.log(err.message)
+        if (err) console.error(err.message)
       },
     )
     db.run(
@@ -41,7 +41,7 @@ export function runDB() {
     )   WITHOUT ROWID;
     `,
       err => {
-        if (err) console.log(err.message)
+        if (err) console.error(err.message)
       },
     )
     db.run(
@@ -56,7 +56,7 @@ export function runDB() {
     )   WITHOUT ROWID;
     `,
       err => {
-        if (err) console.log(err.message)
+        if (err) console.error(err.message)
       },
     )
     db.run(
@@ -76,7 +76,7 @@ export function runDB() {
     );
     `,
       err => {
-        if (err) console.log(err.message)
+        if (err) console.error(err.message)
       },
     )
     db.run(
@@ -88,6 +88,7 @@ export function runDB() {
       Time        INTEGER,
       Message     TEXT,
       SentBy      TEXT,
+      Readed      INTEGER         DEFAULT 0,
       PRIMARY KEY (ChatID)
       FOREIGN KEY (StudentID)     REFERENCES  STUDENT (StudentID)
       FOREIGN KEY (AdvisorID)     REFERENCES  ADVISOR (AdvisorID)
@@ -96,7 +97,7 @@ export function runDB() {
     );
     `,
       err => {
-        if (err) console.log(err.message)
+        if (err) console.error(err.message)
       },
     )
   })

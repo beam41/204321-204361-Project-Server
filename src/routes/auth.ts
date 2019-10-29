@@ -15,9 +15,8 @@ const jwtOptions = {
 }
 const jwtAuth: JwtStrategy = new JwtStrategy(
   jwtOptions,
-  (payload: Payload, done) => {
-    // TODO: check sub in database
-    if (findUser(payload.sub)) done(null, true)
+  async (payload: Payload, done) => {
+    if (await findUser(payload.sub)) done(null, true)
     else done(null, false)
   },
 )
@@ -39,7 +38,6 @@ router.post(
   "/login",
   // login check handler
   async (req, res, next) => {
-    // TODO: check with database
     if (await compareUP(req.body.username, req.body.password)) next()
     else res.send("Wrong username and/or password")
   },

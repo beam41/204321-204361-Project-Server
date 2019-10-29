@@ -17,7 +17,7 @@ export function fromScraper(): void {
     VALUES ('${val.courseID}', '${val.courseName}', ${val.courseCredit});
     `,
       err => {
-        if (err) console.log(err.message)
+        if (err) console.error(err.message)
       },
     )
   })
@@ -27,7 +27,7 @@ export function testInsert(): void {
   db.exec(
     "INSERT INTO STUDENT VALUES ('600510569', 'Phumdol', 'Lookthipnapha', '000000000', 'project')",
     err => {
-      if (err) console.log(err.message)
+      if (err) console.error(err.message)
     },
   )
 }
