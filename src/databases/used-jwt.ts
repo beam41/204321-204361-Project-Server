@@ -38,7 +38,7 @@ export function runDB() {
   `,
         function(err) {
           if (err) console.error(err.message)
-          else
+          else if (this.changes > 0)
             console.log(
               "[" +
                 new Date().toUTCString() +
