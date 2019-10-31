@@ -5,6 +5,7 @@ import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt"
 import colors from "colors/safe"
 import { Payload } from "../models"
 import { compareUP, findUser, findUserType } from "../databases/select"
+import { insertNew, findExpJwt } from "../databases/used-jwt"
 
 const router: Router = Router()
 
@@ -16,7 +17,9 @@ const jwtOptions = {
 const jwtAuth: JwtStrategy = new JwtStrategy(
   jwtOptions,
   async (payload: Payload, done) => {
-    if (await findUser(payload.sub)) done(null, true)
+    const reJwt = jwt.encode(payload, process.env.SECRET)
+    if ((await findUser(payload.sub)) && !(await findExpJwt(reJwt)))
+      done(null, true)
     else done(null, false)
   },
 )
@@ -39,7 +42,7 @@ router.post(
   // login check handler
   async (req, res, next) => {
     if (await compareUP(req.body.username, req.body.password)) next()
-    else res.send("Wrong username and/or password")
+    else res.status(400).send("Wrong username and/or password")
   },
   // return payload
   async (req, res) => {
@@ -56,7 +59,37 @@ router.post(
       expireOn: time + +process.env.TIMEOUT,
     })
     console.log(
-      "[Express] user " + colors.bold(req.body.username) + " is logging in.",
+      "[" +
+        new Date().toUTCString() +
+        "] " +
+        "[Express] user " +
+        colors.bold(req.body.username) +
+        " is logging in.",
+    )
+  },
+)
+
+router.post(
+  "/logout",
+  requireJWTAuth,
+  // return payload
+  async (req, res) => {
+    insertNew(
+      req.header("Authorization"),
+      jwt.decode(req.header("Authorization"), process.env.SECRET).exp * 1000,
+    )
+    res.send({
+      complete: true,
+    })
+    console.log(
+      "[" +
+        new Date().toUTCString() +
+        "] " +
+        "[Express] user " +
+        colors.bold(
+          jwt.decode(req.header("Authorization"), process.env.SECRET).sub,
+        ) +
+        " is logged out.",
     )
   },
 )

@@ -5,14 +5,21 @@ import bodyParser from "body-parser"
 import cors from "cors"
 import routes from "./routes"
 import { runDB } from "./databases"
+import { runDB as runJwtDB } from "./databases/used-jwt"
 import { compareUP } from "./databases/select"
 import { fromScraper } from "./databases/insert"
 
 console.log(
-  colors.yellow(`This server is running in ${process.env.NODE_ENV} mode!`),
+  colors.yellow(
+    "[" +
+      new Date().toUTCString() +
+      "] " +
+      `This server is running in ${process.env.NODE_ENV} mode!`,
+  ),
 )
 
 runDB()
+runJwtDB()
 
 if (process.env.SCRAPE === "true") {
   setTimeout(() => fromScraper(), 10000)
@@ -40,7 +47,11 @@ let port = process.env.PORT || 3000
 app.listen(port, () =>
   console.log(
     colors.green(
-      "[Express] Server listening on port " + colors.bold(`${port}`),
+      "[" +
+        new Date().toUTCString() +
+        "] " +
+        "[Express] Server listening on port " +
+        colors.bold(`${port}`),
     ),
   ),
 )

@@ -5,7 +5,15 @@ const sql = sqlite3.verbose()
 
 export const db = new sql.Database(process.env.DB, err => {
   if (err) console.error(err.message)
-  else console.log(colors.green("[SQLite] Connected to the database :)"))
+  else
+    console.log(
+      colors.green(
+        "[" +
+          new Date().toUTCString() +
+          "] " +
+          "[SQLite] Connected to the database :)",
+      ),
+    )
 })
 // just in case it was turned off once
 db.exec("PRAGMA synchronous=ON")

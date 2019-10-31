@@ -11,7 +11,7 @@ router.post("/testStu", (req, res) => {
 
 router.post("/addReaded", (req, res) => {
   db.exec("ALTER TABLE CHAT ADD Readed INTEGER DEFAULT 0;", err => {
-    if (err) console.log(err)
+    if (err) console.error(err)
   })
   res.send("Sure")
 })
