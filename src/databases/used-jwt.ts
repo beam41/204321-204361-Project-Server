@@ -47,7 +47,7 @@ export function runDB() {
             )
         },
       ),
-    60000,
+    1_800_000,
   )
 }
 
