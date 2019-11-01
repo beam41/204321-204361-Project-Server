@@ -42,7 +42,7 @@ router.post(
   // login check handler
   async (req, res, next) => {
     if (await compareUP(req.body.username, req.body.password)) next()
-    else res.status(400).send("Wrong username and/or password")
+    else res.status(400).send("UsnPwd")
   },
   // return payload
   async (req, res) => {
@@ -78,9 +78,7 @@ router.post(
       req.header("Authorization"),
       jwt.decode(req.header("Authorization"), process.env.SECRET).exp * 1000,
     )
-    res.send({
-      complete: true,
-    })
+    res.send("done")
     console.log(
       "[" +
         new Date().toUTCString() +
