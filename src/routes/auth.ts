@@ -29,12 +29,8 @@ passport.use(jwtAuth)
 export const requireJWTAuth = passport.authenticate("jwt", { session: false })
 
 //login check
-router.get("/test", requireJWTAuth, (req, res) => {
-  res.send(
-    `${
-      jwt.decode(req.header("Authorization"), process.env.SECRET).sub
-    } is here!`,
-  )
+router.get("/test", requireJWTAuth, extractIdJwt, (req, res) => {
+  res.send(`${req.user} is here!`)
 })
 
 router.post(
@@ -72,6 +68,7 @@ router.post(
 router.post(
   "/logout",
   requireJWTAuth,
+  extractIdJwt,
   // return payload
   async (req, res) => {
     insertNew(
@@ -84,12 +81,16 @@ router.post(
         new Date().toUTCString() +
         "] " +
         "[Express] user " +
-        colors.bold(
-          jwt.decode(req.header("Authorization"), process.env.SECRET).sub,
-        ) +
+        // @ts-ignore
+        colors.bold(req.user) +
         " is logged out.",
     )
   },
 )
+
+export async function extractIdJwt(req, res, next) {
+  req.user = jwt.decode(req.header("Authorization"), process.env.SECRET).sub
+  next()
+}
 
 export default router

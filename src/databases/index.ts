@@ -40,8 +40,9 @@ export function runDB() {
       StudentID   CHARACTER(9)    NOT NULL    UNIQUE,
       StdName     TEXT,
       StdSurname  TEXT,
-      AdvisorID   CHARACTER(9)    NOT NULL    DEFAULT '000000000',
+      AdvisorID   CHARACTER(9)    NOT NULL    DEFAULT 'A0',
       Password    TEXT,
+      PerFailed   REAL,
       PRIMARY KEY (StudentID),
       FOREIGN KEY (AdvisorID)     REFERENCES  ADVISOR (AdvisorID)
       ON DELETE   SET DEFAULT
@@ -58,8 +59,6 @@ export function runDB() {
       CourseID      CHARACTER(6)    NOT NULL    UNIQUE,
       CourseName    TEXT,
       CourseCredit  INTEGER,
-      CourseType    TEXT,
-      Prereq        TEXT,
       PRIMARY KEY (CourseID)
     )   WITHOUT ROWID;
     `,
