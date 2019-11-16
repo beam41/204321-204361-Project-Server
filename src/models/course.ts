@@ -1,8 +1,9 @@
 export default class Course {
-  courseID: string
-  courseName: string
-  courseCredit: number
-  year: number
-  term: number
-  grade: string
+  CourseID: string
+  CourseName: string
+  CourseCredit: number
+  Year: number
+  Term: number
+  Grade: string
+  EditedGrade: string
 }

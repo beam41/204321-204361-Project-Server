@@ -25,7 +25,7 @@ export async function insertCourses(arr: Course[]): Promise<void> {
         db.exec(
           `
         INSERT OR IGNORE INTO COURSE (CourseID, CourseName, CourseCredit)
-        VALUES ('${val.courseID}', '${val.courseName}', ${val.courseCredit});
+        VALUES ('${val.CourseID}', '${val.CourseName}', ${val.CourseCredit});
         `,
           err => {
             if (err) console.error(colors.red(err.message))
@@ -109,7 +109,22 @@ export async function insertPlans(arr: any[]): Promise<void> {
   )
   const progress = []
   arr.forEach(val => {
-    console.log(val.ID)
+    val.plans.forEach((val2: Course) => {
+      progress.push(
+        new Promise((resolve, reject) =>
+          db.exec(
+            `
+            INSERT OR REPLACE INTO STDPLAN (StudentID, CourseID, Year, Term, Grade)
+            VALUES ('${val.ID}', '${val2.CourseID}', '${val2.Year}', '${val2.Term}','${val2.Grade}');
+          `,
+            err => {
+              if (err) console.error(colors.red(err.message))
+              resolve()
+            },
+          ),
+        ),
+      )
+    })
   })
   await Promise.all(progress)
   console.log(

@@ -2,8 +2,8 @@ import { Course } from "../models"
 
 function gradeCalc(courseGrades: Course[]): number {
   return (
-    courseGrades.reduce((a, b) => a + b.courseGrade * b.courseCredit, 0) /
-    courseGrades.reduce((a, b) => a + b.courseCredit, 0)
+    courseGrades.reduce((a, b) => a + +b.Grade * b.CourseCredit, 0) /
+    courseGrades.reduce((a, b) => a + b.CourseCredit, 0)
   )
 }
 

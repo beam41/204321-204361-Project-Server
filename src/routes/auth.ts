@@ -58,7 +58,7 @@ router.post(
       "[" +
         new Date().toUTCString() +
         "] " +
-        "[Express] user " +
+        "[Express] User " +
         colors.bold(req.body.username) +
         " is logging in.",
     )
@@ -80,7 +80,7 @@ router.post(
       "[" +
         new Date().toUTCString() +
         "] " +
-        "[Express] user " +
+        "[Express] User " +
         // @ts-ignore
         colors.bold(req.user) +
         " is logged out.",
@@ -90,6 +90,7 @@ router.post(
 
 export async function extractIdJwt(req, res, next) {
   req.user = jwt.decode(req.header("Authorization"), process.env.SECRET).sub
+  req.userType = await findUserType(req.user)
   next()
 }
 

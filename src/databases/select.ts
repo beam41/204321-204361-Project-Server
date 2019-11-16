@@ -1,5 +1,5 @@
 import { db } from "./index"
-import { Student, Advisor } from "../models"
+import { Student, Advisor, Course } from "../models"
 
 /**
  * compare Username and Password
@@ -124,6 +124,44 @@ export async function findUserType(username: string): Promise<string> {
     ),
   ).then((value: Advisor) => {
     if (value) found = "advisor"
+  })
+  return found
+}
+
+export async function getPlans(stuID: string): Promise<Course[]> {
+  let found: Course[]
+  await new Promise((resolve, reject) =>
+    db.all(
+      `
+      SELECT P.CourseID, C.CourseName, P."Year", P.Term, P.Grade, P.EditedGrade, C.CourseCredit
+      FROM STDPLAN P
+      INNER JOIN COURSE C ON P.CourseID = C.CourseID
+      WHERE P.StudentID = '${stuID}'
+      ORDER BY P."Year", P.Term, P.CourseID
+    `,
+      (err, row) => {
+        if (err) reject(err)
+        else {
+          let solve = []
+          row.forEach((val: Course) => {
+            if (val.Grade !== "P") {
+              solve.push({
+                CourseID: val.CourseID,
+                CourseName: val.CourseName,
+                CourseCredit: val.CourseCredit,
+                Year: val.Term,
+                Term: val.Term,
+                Grade: val.Grade,
+              })
+            } else
+              solve.push(val)
+          })
+          resolve(solve)
+        }
+      },
+    ),
+  ).then((value: Course[]) => {
+    if (value) found = value
   })
   return found
 }

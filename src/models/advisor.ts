@@ -1,6 +1,6 @@
 export default class Advisor {
-  advisorID: string
-  advName: string
-  advSurname: string
-  password: string
+  AdvisorID: string
+  AdvName: string
+  AdvSurname: string
+  Password: string
 }

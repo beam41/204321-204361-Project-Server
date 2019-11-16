@@ -74,6 +74,8 @@ export function runDB() {
       Year        INTEGER,
       Term        INTEGER,
       Grade       CHARACTER(2),
+      EditedGrade CHARACTER(2),
+      PRIMARY KEY (StudentID, CourseID, Year, Term)
       FOREIGN KEY (StudentID)     REFERENCES  STUDENT (StudentID)
       ON DELETE   CASCADE
       ON UPDATE   CASCADE

@@ -31,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use("/auth", routes.auth)
 app.use("/test", routes.test)
 app.use("/request", routes.request)
+app.use("/plan", routes.plan)
 
 app.get("/", (req, res) => res.send("Hi"))
 

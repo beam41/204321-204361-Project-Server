@@ -1,5 +1,6 @@
 import { Router } from "express"
 import { testInsert } from "../databases/insert"
+import { getPlans } from "../databases/select"
 import { db } from "../databases"
 import colors from "colors/safe"
 
@@ -16,5 +17,7 @@ router.post("/addReaded", (req, res) => {
   })
   res.send("Sure")
 })
+
+
 
 export default router

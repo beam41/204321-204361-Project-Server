@@ -36,4 +36,15 @@ router.post("/plans", (req, res) => {
   res.send("try to fetch plan now!")
 })
 
+router.post("/plans/:id", (req, res) => {
+  console.log(
+    "[" +
+      new Date().toUTCString() +
+      "] " +
+      "[Express] requested to fetch student plan",
+  )
+  connect.fetchPlan(req.params.id)
+  res.send("try to fetch plan now!")
+})
+
 export default router

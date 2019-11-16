@@ -66,6 +66,3 @@ typings/
 
 # vscode setting
 .vscode
-
-#scraped file it's very big
-course.json

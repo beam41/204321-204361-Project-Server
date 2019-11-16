@@ -29,7 +29,7 @@ export function fetchUser() {
  * it's can be manually run by remote regserver
  *
  */
-export function fetchPlan(id?: number) {
+export function fetchPlan(id?: string) {
   axios.get(`/plans/${id ? id : ""}`).then(
     value => {
       insertPlans(value.data)
