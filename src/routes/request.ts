@@ -8,7 +8,7 @@ router.post("/users", (req, res) => {
     "[" +
       new Date().toUTCString() +
       "] " +
-      "[Express] reg requested to fetch users",
+      "[Express] requested to fetch users",
   )
   connect.fetchUser()
   res.send("try to fetch user now!")
@@ -19,18 +19,18 @@ router.post("/courses", (req, res) => {
     "[" +
       new Date().toUTCString() +
       "] " +
-      "[Express] reg requested to fetch courses",
+      "[Express] requested to fetch courses",
   )
   connect.fetchCourse()
   res.send("try to fetch course now!")
 })
 
-router.post("/courses", (req, res) => {
+router.post("/plans", (req, res) => {
   console.log(
     "[" +
       new Date().toUTCString() +
       "] " +
-      "[Express] reg requested to fetch student plan",
+      "[Express] requested to fetch student plan",
   )
   connect.fetchPlan()
   res.send("try to fetch plan now!")

@@ -7,7 +7,6 @@ import routes from "./routes"
 import { runDB } from "./databases"
 import { runDB as runJwtDB } from "./databases/used-jwt"
 import { compareUP } from "./databases/select"
-import { fromScraper } from "./databases/insert"
 
 console.log(
   colors.yellow(
@@ -21,10 +20,6 @@ console.log(
 runDB()
 runJwtDB()
 
-if (process.env.SCRAPE === "true") {
-  setTimeout(() => fromScraper(), 10000)
-}
-
 const app: express.Application = express()
 
 //important middleware
@@ -35,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //routes
 app.use("/auth", routes.auth)
 app.use("/test", routes.test)
+app.use("/request", routes.request)
 
 app.get("/", (req, res) => res.send("Hi"))
 

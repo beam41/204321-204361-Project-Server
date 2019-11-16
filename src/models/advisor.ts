@@ -1,6 +1,6 @@
-export default class Student {
-  AdvisorID: string
-  AdvName: string
-  AdvSurname: string
-  Password: string
+export default class Advisor {
+  advisorID: string
+  advName: string
+  advSurname: string
+  password: string
 }

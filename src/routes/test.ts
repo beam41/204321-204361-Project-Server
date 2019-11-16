@@ -1,6 +1,7 @@
 import { Router } from "express"
 import { testInsert } from "../databases/insert"
 import { db } from "../databases"
+import colors from "colors/safe"
 
 const router: Router = Router()
 
@@ -11,7 +12,7 @@ router.post("/testStu", (req, res) => {
 
 router.post("/addReaded", (req, res) => {
   db.exec("ALTER TABLE CHAT ADD Readed INTEGER DEFAULT 0;", err => {
-    if (err) console.error(err)
+    if (err) console.error(colors.red(err.message))
   })
   res.send("Sure")
 })

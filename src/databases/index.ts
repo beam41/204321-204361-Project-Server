@@ -4,7 +4,7 @@ import colors from "colors/safe"
 const sql = sqlite3.verbose()
 
 export const db = new sql.Database(process.env.DB, err => {
-  if (err) console.error(err.message)
+  if (err) console.error(colors.red(err.message))
   else
     console.log(
       colors.green(
@@ -31,7 +31,7 @@ export function runDB() {
     ) WITHOUT ROWID;
     `,
       err => {
-        if (err) console.error(err.message)
+        if (err) console.error(colors.red(err.message))
       },
     )
     db.run(
@@ -50,7 +50,7 @@ export function runDB() {
     )   WITHOUT ROWID;
     `,
       err => {
-        if (err) console.error(err.message)
+        if (err) console.error(colors.red(err.message))
       },
     )
     db.run(
@@ -63,7 +63,7 @@ export function runDB() {
     )   WITHOUT ROWID;
     `,
       err => {
-        if (err) console.error(err.message)
+        if (err) console.error(colors.red(err.message))
       },
     )
     db.run(
@@ -83,7 +83,7 @@ export function runDB() {
     );
     `,
       err => {
-        if (err) console.error(err.message)
+        if (err) console.error(colors.red(err.message))
       },
     )
     db.run(
@@ -104,7 +104,7 @@ export function runDB() {
     );
     `,
       err => {
-        if (err) console.error(err.message)
+        if (err) console.error(colors.red(err.message))
       },
     )
   })

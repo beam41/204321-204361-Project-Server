@@ -1,7 +1,8 @@
 export default class Student {
-  StudentID: string
-  StdName: string
-  StdSurname: string
-  AdvisorID: string
-  Password: string
+  studentID: string
+  stdName: string
+  stdSurname: string
+  advisorID: string
+  password: string
+  perFailed: number
 }

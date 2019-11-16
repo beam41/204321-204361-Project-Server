@@ -1,9 +1,9 @@
 import auth from "./auth"
 import test from "./test"
-import reg from "./reg"
+import request from "./request"
 
 export default {
   auth,
   test,
-  reg,
+  request,
 }

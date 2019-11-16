@@ -4,7 +4,7 @@ import colors from "colors/safe"
 const sql = sqlite3.verbose()
 
 export const dbMem = new sql.Database(":memory:", err => {
-  if (err) console.error(err.message)
+  if (err) console.error(colors.red(err.message))
   else
     console.log(
       colors.green(
@@ -25,7 +25,7 @@ export function runDB() {
   );
   `,
     err => {
-      if (err) console.error(err.message)
+      if (err) console.error(colors.red(err.message))
     },
   )
 
@@ -37,7 +37,7 @@ export function runDB() {
       WHERE expireTime < ${Date.now()}
   `,
         function(err) {
-          if (err) console.error(err.message)
+          if (err) console.error(colors.red(err.message))
           else if (this.changes > 0)
             console.log(
               "[" +
@@ -57,7 +57,7 @@ export function insertNew(jwt: string, expireTime: number): void {
     INSERT INTO JWT
     VALUES ('${jwt}', ${expireTime})`,
     err => {
-      if (err) console.error(err.message)
+      if (err) console.error(colors.red(err.message))
     },
   )
 }

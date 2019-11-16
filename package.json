@@ -9,7 +9,7 @@
     "ct": "tsc",
     "ct:w": "tsc --watch",
     "scrape": "node ./src/courseScraper.js",
-    "start:scrape": "cross-env NODE_ENV=development SCRAPE=true nodemon --exec babel-node -- ./src/index.ts --extensions '.ts'"
+    "start:dummy": "nodemon ./dummy-reg/reg.js"
   },
   "repository": {
     "type": "git",
