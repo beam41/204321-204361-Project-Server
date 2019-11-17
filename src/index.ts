@@ -28,16 +28,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 //routes
-app.use("/auth", routes.auth)
-app.use("/test", routes.test)
-app.use("/request", routes.request)
-app.use("/plan", routes.plan)
+app.use("/api/auth", routes.auth)
+app.use("/api/test", routes.test)
+app.use("/api/request", routes.request)
+app.use("/api/plan", routes.plan)
 
-app.get("/", (req, res) => res.send("Hi"))
-
-app.get("/test", async (req, res) =>
-  res.send(await compareUP(req.body.username, req.body.password)),
-)
+app.get("/api", (req, res) => res.send("Hi"))
 
 //listen
 let port = process.env.PORT || 3000

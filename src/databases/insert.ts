@@ -12,30 +12,30 @@ export function testInsert(): void {
 }
 
 export async function insertCourses(arr: Course[]): Promise<void> {
-  db.exec("PRAGMA synchronous=OFF")
   console.log(
     colors.green(
       "[" + new Date().toUTCString() + "] " + "[SQLite] Insert Courses!",
     ),
   )
-  const progress = []
-  arr.forEach(val => {
-    progress.push(
-      new Promise((resolve, reject) =>
-        db.exec(
-          `
+  const all = arr.map(
+    val =>
+      `('${val.CourseID}', '${val.CourseName.replace(/\'/g, "''")}', ${
+        val.CourseCredit
+      })`,
+  )
+  const strall = all.join(",")
+  await new Promise((resolve, reject) =>
+    db.exec(
+      `
         INSERT OR IGNORE INTO COURSE (CourseID, CourseName, CourseCredit)
-        VALUES ('${val.CourseID}', '${val.CourseName}', ${val.CourseCredit});
+        VALUES ${strall};
         `,
-          err => {
-            if (err) console.error(colors.red(err.message))
-            resolve()
-          },
-        ),
-      ),
-    )
-  })
-  await Promise.all(progress)
+      err => {
+        if (err) console.error(colors.red(err.message))
+        resolve()
+      },
+    ),
+  )
   console.log(
     colors.green(
       "[" +
@@ -44,7 +44,6 @@ export async function insertCourses(arr: Course[]): Promise<void> {
         "[SQLite] Insert Courses complete!",
     ),
   )
-  db.exec("PRAGMA synchronous=ON")
 }
 
 export async function insertUsers(arr: User[]): Promise<void> {

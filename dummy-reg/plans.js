@@ -1,6 +1,6 @@
 module.exports = [
   {
-    //First Term1
+    //First Term1 (1)
     ID: "600510569",
     plans: [
       {
@@ -51,9 +51,193 @@ module.exports = [
         Term: 1,
         Grade: "C+",
       },
+      //FIRST Term2 (1)
+      {
+        CourseID: "001102",
+        Year: 1,
+        Term: 2,
+        Grade: "B+",
+      },
+      {
+        CourseID: "204113",
+        Year: 1,
+        Term: 2,
+        Grade: "B+",
+      },
+      {
+        CourseID: "206112",
+        Year: 1,
+        Term: 2,
+        Grade: "C",
+      },
+      {
+        CourseID: "207117",
+        Year: 1,
+        Term: 1,
+        Grade: "A",
+      },
+      {
+        CourseID: "207187",
+        Year: 1,
+        Term: 1,
+        Grade: "D+",
+      },
+      {
+        CourseID: "851103",
+        Year: 1,
+        Term: 2,
+        Grade: "C+",
+      },
+      {
+        CourseID: "951100",
+        Year: 1,
+        Term: 2,
+        Grade: "A",
+      },
+
+      //First Term1 (2)
+      {
+        CourseID: "001201",
+        Year: 2,
+        Term: 1,
+        Grade: "A",
+      },
+      {
+        CourseID: "001230",
+        Year: 2,
+        Term: 1,
+        Grade: "B+",
+      },
+      {
+        CourseID: "204231",
+        Year: 2,
+        Term: 1,
+        Grade: "A",
+      },
+      {
+        CourseID: "204251",
+        Year: 2,
+        Term: 1,
+        Grade: "A",
+      },
+      {
+        CourseID: "204281",
+        Year: 2,
+        Term: 1,
+        Grade: "B",
+      },
+      {
+        CourseID: "208263",
+        Year: 2,
+        Term: 1,
+        Grade: "B+",
+      },
+      //FIRST Term2 (2)
+
+      {
+        CourseID: "001210",
+        Year: 2,
+        Term: 2,
+        Grade: "B+",
+      },
+      {
+        CourseID: "001225",
+        Year: 2,
+        Term: 2,
+        Grade: "A",
+      },
+      {
+        CourseID: "059419",
+        Year: 2,
+        Term: 2,
+        Grade: "B+",
+      },
+      {
+        CourseID: "109114",
+        Year: 2,
+        Term: 2,
+        Grade: "B+",
+      },
+      {
+        CourseID: "204211",
+        Year: 2,
+        Term: 2,
+        Grade: "A",
+      },
+      {
+        CourseID: "204232",
+        Year: 2,
+        Term: 2,
+        Grade: "A",
+      },
+      {
+        CourseID: "204315",
+        Year: 2,
+        Term: 2,
+        Grade: "A",
+      },
+      //FIRST SUMMER(2)
+      {
+        CourseID: "013110",
+        Year: 2,
+        Term: 2,
+        Grade: "C+",
+      },
+      {
+        CourseID: "801100",
+        Year: 2,
+        Term: 2,
+        Grade: "A",
+      },
+      //FIRST Term1 (3)
+      {
+        CourseID: "001291",
+        Year: 3,
+        Term: 1,
+        Grade: "P",
+      },
+      {
+        CourseID: "057133",
+        Year: 3,
+        Term: 1,
+        Grade: "P",
+      },
+      {
+        CourseID: "204321",
+        Year: 3,
+        Term: 1,
+        Grade: "P",
+      },
+      {
+        CourseID: "204341",
+        Year: 3,
+        Term: 1,
+        Grade: "P",
+      },
+      {
+        CourseID: "204361",
+        Year: 3,
+        Term: 1,
+        Grade: "P",
+      },
+      {
+        CourseID: "204432",
+        Year: 3,
+        Term: 1,
+        Grade: "P",
+      },
+      {
+        CourseID: "204451",
+        Year: 3,
+        Term: 1,
+        Grade: "P",
+      },
+
+
     ],
   },
   {
+
     ID: "600510566",
     plans: [
       //Second Term1 (1)
@@ -149,7 +333,7 @@ module.exports = [
         Term: 2,
         Grade: "B+",
       },
-      //SUMMER1
+      //SECOND SUMMER1
       {
         CourseID: "203111",
         Year: 1,
@@ -157,7 +341,7 @@ module.exports = [
         Grade: "D",
       },
       {
-        CourseID: "206112",
+        CourseID: "2206112",
         Year: 1,
         Term: 3,
         Grade: "F",
@@ -273,6 +457,11 @@ module.exports = [
         Term: 3,
         Grade: "A",
       },
+
+
+
     ],
   },
+
+
 ]

@@ -4,7 +4,7 @@ import passport from "passport"
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt"
 import colors from "colors/safe"
 import { Payload } from "../models"
-import { compareUP, findUser, findUserType } from "../databases/select"
+import { compareUP, findUser } from "../databases/select"
 import { insertNew, findExpJwt } from "../databases/used-jwt"
 
 const router: Router = Router()
@@ -37,6 +37,8 @@ router.post(
   "/login",
   // login check handler
   async (req, res, next) => {
+    // @ts-ignore
+    req.type = await compareUP(req.body.username, req.body.password)
     if (await compareUP(req.body.username, req.body.password)) next()
     else res.status(400).send("UsnPwd")
   },
@@ -47,11 +49,14 @@ router.post(
       sub: req.body.username,
       iat: time,
       exp: time + +process.env.TIMEOUT,
+      // @ts-ignore
+      typ: req.type,
     }
     res.send({
       jwt: jwt.encode(payload, process.env.SECRET),
       username: req.body.username,
-      userType: await findUserType(req.body.username),
+      // @ts-ignore
+      userType: req.type,
       expireOn: time + +process.env.TIMEOUT,
     })
     console.log(
@@ -89,8 +94,9 @@ router.post(
 )
 
 export async function extractIdJwt(req, res, next) {
-  req.user = jwt.decode(req.header("Authorization"), process.env.SECRET).sub
-  req.userType = await findUserType(req.user)
+  const jwtDec = jwt.decode(req.header("Authorization"), process.env.SECRET)
+  req.user = jwtDec.sub
+  req.userType = jwtDec.typ
   next()
 }
 
