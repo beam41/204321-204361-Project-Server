@@ -73,13 +73,13 @@ module.exports = [
       {
         CourseID: "207117",
         Year: 1,
-        Term: 1,
+        Term: 2,
         Grade: "A",
       },
       {
         CourseID: "207187",
         Year: 1,
-        Term: 1,
+        Term: 2,
         Grade: "D+",
       },
       {
@@ -180,13 +180,13 @@ module.exports = [
       {
         CourseID: "013110",
         Year: 2,
-        Term: 2,
+        Term: 3,
         Grade: "C+",
       },
       {
         CourseID: "801100",
         Year: 2,
-        Term: 2,
+        Term: 3,
         Grade: "A",
       },
       //FIRST Term1 (3)
@@ -232,12 +232,9 @@ module.exports = [
         Term: 1,
         Grade: "P",
       },
-
-
     ],
   },
   {
-
     ID: "600510566",
     plans: [
       //Second Term1 (1)
@@ -341,7 +338,7 @@ module.exports = [
         Grade: "D",
       },
       {
-        CourseID: "2206112",
+        CourseID: "206112",
         Year: 1,
         Term: 3,
         Grade: "F",
@@ -457,11 +454,6 @@ module.exports = [
         Term: 3,
         Grade: "A",
       },
-
-
-
     ],
   },
-
-
 ]

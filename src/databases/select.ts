@@ -1,5 +1,5 @@
 import { db } from "./index"
-import { Student, Advisor, Course } from "../models"
+import { Student, Advisor, Course, Chat } from "../models"
 
 /**
  * compare Username and Password
@@ -109,12 +109,11 @@ export async function getPlans(stuID: string): Promise<Course[]> {
                 CourseID: val.CourseID,
                 CourseName: val.CourseName,
                 CourseCredit: val.CourseCredit,
-                Year: val.Term,
+                Year: val.Year,
                 Term: val.Term,
                 Grade: val.Grade,
               })
-            } else
-              solve.push(val)
+            } else solve.push(val)
           })
           resolve(solve)
         }
@@ -122,6 +121,52 @@ export async function getPlans(stuID: string): Promise<Course[]> {
     ),
   ).then((value: Course[]) => {
     if (value) found = value
+  })
+  return found
+}
+
+export async function getChat(
+  stuID: string,
+  advID: string,
+  time: number,
+): Promise<Chat[]> {
+  let found: Chat[]
+  await new Promise((resolve, reject) =>
+    db.all(
+      `
+      SELECT 	StudentID, AdvisorID, Time, Message, SentBy
+      FROM 	CHAT
+      WHERE 	StudentID = '${stuID}'
+      AND		AdvisorID = '${advID}'
+      AND		Time > ${time}
+    `,
+      (err, row) => {
+        if (err) reject(err)
+        else resolve(row)
+      },
+    ),
+  ).then((value: Chat[]) => {
+    if (value) found = value
+  })
+  return found
+}
+
+export async function getAdv(stuID: string): Promise<string> {
+  let found: string
+  await new Promise((resolve, reject) =>
+    db.get(
+      `
+      SELECT 	AdvisorID
+      FROM	STUDENT
+      WHERE	StudentID = '${stuID}'
+    `,
+      (err, row) => {
+        if (err) reject(err)
+        else resolve(row)
+      },
+    ),
+  ).then((value: any) => {
+    if (value) found = value.AdvisorID
   })
   return found
 }

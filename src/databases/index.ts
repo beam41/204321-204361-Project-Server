@@ -91,13 +91,12 @@ export function runDB() {
     db.run(
       `
     CREATE TABLE IF NOT EXISTS CHAT (
-      ChatID      CHARACTER(10)   NOT NULL    UNIQUE,
+      ChatID      INTEGER         NOT NULL    UNIQUE,
       StudentID   CHARACTER(9)    NOT NULL,
       AdvisorID   CHARACTER(9)    NOT NULL,
       Time        INTEGER,
       Message     TEXT,
       SentBy      TEXT,
-      Readed      INTEGER         DEFAULT 0,
       PRIMARY KEY (ChatID)
       FOREIGN KEY (StudentID)     REFERENCES  STUDENT (StudentID)
       FOREIGN KEY (AdvisorID)     REFERENCES  ADVISOR (AdvisorID)

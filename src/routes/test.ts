@@ -11,13 +11,4 @@ router.post("/testStu", (req, res) => {
   res.send("Hi")
 })
 
-router.post("/addReaded", (req, res) => {
-  db.exec("ALTER TABLE CHAT ADD Readed INTEGER DEFAULT 0;", err => {
-    if (err) console.error(colors.red(err.message))
-  })
-  res.send("Sure")
-})
-
-
-
 export default router
