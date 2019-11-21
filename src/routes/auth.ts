@@ -4,7 +4,7 @@ import passport from "passport"
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt"
 import colors from "colors/safe"
 import { Payload } from "../models"
-import { compareUP, findUser } from "../databases/select"
+import { compareUP, findUser, getAdv } from "../databases/select"
 import { insertNew, findExpJwt } from "../databases/used-jwt"
 
 const router: Router = Router()
@@ -58,6 +58,7 @@ router.post(
       // @ts-ignore
       userType: req.type,
       expireOn: time + +process.env.TIMEOUT,
+      adv: await getAdv(req.body.username),
     })
     console.log(
       "[" +

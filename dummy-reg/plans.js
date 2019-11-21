@@ -121,7 +121,7 @@ module.exports = [
         Grade: "A",
       },
       {
-        CourseID: "204281",
+        CourseID: "206281",
         Year: 2,
         Term: 1,
         Grade: "B",
@@ -156,7 +156,7 @@ module.exports = [
         CourseID: "109114",
         Year: 2,
         Term: 2,
-        Grade: "B+",
+        Grade: "C+",
       },
       {
         CourseID: "204211",

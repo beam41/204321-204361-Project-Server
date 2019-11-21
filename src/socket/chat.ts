@@ -30,7 +30,7 @@ export default function chat(io: socketio.Server): void {
         "[" +
           new Date().toUTCString() +
           "] " +
-          `[SocketIO] ${sesName} disconnected`,
+          `[SocketIO] ${sesName ? sesName : "Someone"} disconnected`,
       ),
     )
   })

@@ -20,38 +20,38 @@ const router: Router = Router()
 
 router.post("/", requireJWTAuth, extractIdJwt, (req, res) => {
   // @ts-ignore
-  if (req.userType === "student")
-    newChat(
-      req.body.chat.map(val => {
-        return {
-          StudentID: req.user,
-          AdvisorID: val.to,
-          Time: val.Time,
-          Message: val.Message,
-          SentBy: "student",
-        }
-      }),
-    )
-  else
-    newChat(
-      req.body.chat.map(val => {
-        return {
-          StudentID: val.to,
-          AdvisorID: req.user,
-          Time: val.Time,
-          Message: val.Message,
-          SentBy: "advisor",
-        }
-      }),
-    )
-  res.send("complete")
+  if (req.userType === "student") {
+    const bd = {
+      // @ts-ignore
+      StudentID: req.user,
+      AdvisorID: req.body.to,
+      Time: req.body.Time,
+      Message: req.body.Message,
+      SentBy: "student",
+    }
+    // @ts-ignore
+    newChat(bd)
+    res.send([bd])
+  } else {
+    const bd = {
+      StudentID: req.body.to,
+      // @ts-ignore
+      AdvisorID: req.user,
+      Time: req.body.Time,
+      Message: req.body.Message,
+      SentBy: "advisor",
+    }
+    // @ts-ignore
+    newChat(bd)
+    res.send([bd])
+  }
 })
 
 router.get("/", requireJWTAuth, extractIdJwt, async (req, res) => {
   // @ts-ignore
   if (req.userType === "student")
     // @ts-ignore
-    res.send(await getChat(req.user, await getAdv(req.user), req.body.latest))
+    res.send(await getChat(req.user, await getAdv(req.user), req.query.latest))
   else res.status(403).send()
 })
 
@@ -59,7 +59,7 @@ router.get("/:id", requireJWTAuth, extractIdJwt, async (req, res) => {
   // @ts-ignore
   if (req.userType === "advisor")
     // @ts-ignore
-    res.send(await getChat(req.params.id, req.user, req.body.latest))
+    res.send(await getChat(req.params.id, req.user, req.query.latest))
   else res.status(403).send()
 })
 

@@ -1,5 +1,7 @@
 import { db } from "./index"
 import { Student, Advisor, Course, Chat } from "../models"
+import { GradeAvg, percentRetired } from "../util/calc"
+import colors from "colors/safe"
 
 /**
  * compare Username and Password
@@ -167,6 +169,48 @@ export async function getAdv(stuID: string): Promise<string> {
     ),
   ).then((value: any) => {
     if (value) found = value.AdvisorID
+  })
+  return found
+}
+
+export async function getStuList(advId: string): Promise<any[]> {
+  let found: any[] = []
+  await new Promise((resolve, reject) =>
+    db.all(
+      `
+      SELECT 	StudentID, StdName, StdSurname, PerFailed
+      FROM	  STUDENT
+      WHERE	  AdvisorID = '${advId}'
+    `,
+      (err, row) => {
+        if (err) reject(err)
+        else resolve(row)
+      },
+    ),
+  ).then((value: any) => {
+    if (value)
+      value.forEach(val => {
+        let failed = val.PerFailed
+        if (!failed) {
+          getPlans(val.StudentID).then(v => {
+            const grade = +GradeAvg(v)
+            failed = percentRetired(grade)
+            db.exec(
+              `
+              UPDATE STUDENT SET PerFailed = ${failed}
+              WHERE StudentID = '${val.StudentID}'
+            `,
+              err => {
+                if (err) console.error(colors.red(err.message))
+              },
+            )
+          })
+        }
+        found.push({
+          ...val,
+          PerFailed: failed,
+        })
+      })
   })
   return found
 }

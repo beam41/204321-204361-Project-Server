@@ -39,6 +39,7 @@ app.use("/api/test", routes.test)
 app.use("/api/request", routes.request)
 app.use("/api/plan", routes.plan)
 app.use("/api/chat", routes.chat)
+app.use("/api/adv", routes.adv)
 
 // passing io
 chat(io)

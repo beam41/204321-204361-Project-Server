@@ -134,32 +134,17 @@ export async function insertPlans(arr: any[]): Promise<void> {
   db.exec("PRAGMA synchronous=ON")
 }
 
-export async function newChat(arr: Chat[]): Promise<void> {
-  const all = arr.map(
-    val =>
-      `('${val.StudentID}', '${val.AdvisorID}', ${
-        val.Time
-      }, '${val.Message.replace(/\'/g, "''")}', '${val.SentBy}')`,
-  )
-  const strall = all.join(",")
+export async function newChat(val: Chat): Promise<void> {
   await new Promise((resolve, reject) =>
     db.exec(
       `
         INSERT OR IGNORE INTO CHAT (StudentID, AdvisorID, Time, Message, SentBy)
-        VALUES ${strall};
+        VALUES ('${val.StudentID}', '${val.AdvisorID}', ${val.Time}, '${val.Message}', '${val.SentBy}');
         `,
       err => {
         if (err) console.error(colors.red(err.message))
         resolve()
       },
-    ),
-  )
-  console.log(
-    colors.green(
-      "[" +
-        new Date().toUTCString() +
-        "] " +
-        "[SQLite] Insert Courses complete!",
     ),
   )
 }
