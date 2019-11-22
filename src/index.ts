@@ -1,4 +1,5 @@
 import "dotenv/config"
+import "babel-polyfill"
 import colors from "colors/safe"
 import express from "express"
 import bodyParser from "body-parser"
@@ -10,6 +11,7 @@ import { runDB as runMapDB } from "./databases/usn-map"
 import http from "http"
 import socketio from "socket.io"
 import chat from "./socket/chat"
+import path from "path"
 
 console.log(
   colors.yellow(
@@ -32,6 +34,7 @@ const io = socketio(server)
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, "build")))
 
 //routes
 app.use("/api/auth", routes.auth)
@@ -45,6 +48,10 @@ app.use("/api/adv", routes.adv)
 chat(io)
 
 app.get("/api", (req, res) => res.send("Hi"))
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"))
+})
 
 //listen
 let port = process.env.PORT || 3000
