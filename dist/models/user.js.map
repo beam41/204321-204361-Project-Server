@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/models/user.ts"],"names":["User"],"mappings":";;;;;;;;;;;IAAqBA,I","sourcesContent":["export default class User {\n  type: string\n  ID: string\n  name: string\n  surname: string\n  password: string\n  advID: string\n}\n"],"file":"user.js"}

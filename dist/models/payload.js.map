@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/models/payload.ts"],"names":["Payload"],"mappings":";;;;;;;;;;;IAAqBA,O","sourcesContent":["export default class Payload {\n  sub: string\n  iat: number\n  exp: number\n  typ: string\n}\n"],"file":"payload.js"}

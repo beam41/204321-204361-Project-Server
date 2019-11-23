@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/models/chat.ts"],"names":["Chat"],"mappings":";;;;;;;;;;;IAAqBA,I","sourcesContent":["export default class Chat {\n  ChatID: string\n  StudentID: string\n  AdvisorID: string\n  Time: number\n  Message: string\n  SentBy: string\n}\n"],"file":"chat.js"}

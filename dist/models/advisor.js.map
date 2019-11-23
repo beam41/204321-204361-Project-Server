@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/models/advisor.ts"],"names":["Advisor"],"mappings":";;;;;;;;;;;IAAqBA,O","sourcesContent":["export default class Advisor {\n  AdvisorID: string\n  AdvName: string\n  AdvSurname: string\n  Password: string\n}\n"],"file":"advisor.js"}

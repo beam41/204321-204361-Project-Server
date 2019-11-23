@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/models/course.ts"],"names":["Course"],"mappings":";;;;;;;;;;;IAAqBA,M","sourcesContent":["export default class Course {\n  CourseID: string\n  CourseName: string\n  CourseCredit: number\n  Year: number\n  Term: number\n  Grade: string\n  EditedGrade: string\n}\n"],"file":"course.js"}

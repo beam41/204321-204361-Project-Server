@@ -1,6 +1,0 @@
-export { default as Payload } from "./payload"
-export { default as Student } from "./student"
-export { default as Advisor } from "./advisor"
-export { default as Course } from "./course"
-export { default as User } from "./user"
-export { default as Chat } from "./chat"

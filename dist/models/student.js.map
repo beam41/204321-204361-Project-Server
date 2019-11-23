@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/models/student.ts"],"names":["Student"],"mappings":";;;;;;;;;;;IAAqBA,O","sourcesContent":["export default class Student {\n  StudentID: string\n  StdName: string\n  StdSurname: string\n  AdvisorID: string\n  Password: string\n  PerFailed: number\n}\n"],"file":"student.js"}
