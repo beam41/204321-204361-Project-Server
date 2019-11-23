@@ -21,9 +21,9 @@ This project is for CS students to track their grade and immediatly contact adis
 
 ## How to start the server
 
-1. (First time only) Type `npm install` in bash or cmd to install node module used in project
+1. (First time only) Type `npm install` in bash or cmd to install node module used in project.
 
-2. if .env not exits create it included these setting
+2. if .env not exits create it included these setting.
 
    ```
    PORT = [any port you like]
@@ -33,11 +33,11 @@ This project is for CS students to track their grade and immediatly contact adis
    REGURL = [The url to reg api server]
    ```
 
-3. Start the server with `npm start`
+3. Start the server with `npm start`.
 
-4. If main.db not exist it will auto generate
+4. If main.db not exist it will auto generate.
 
-   4.1 to populate the database with **dummy** api start dummy server first with `npm run start:dummy` then in `.env` use `http://localhost:9999/` in `REGURL`
+   4.1 to populate the database with **dummy** api start dummy server first with `npm run start:dummy` then in `.env` use `http://localhost:9999/` in `REGURL`.
 
    4.2 To populate the database with **real** api just type api path in `REGURL` the api should have HTTP method `GET` and
 
@@ -88,11 +88,11 @@ This project is for CS students to track their grade and immediatly contact adis
    {server}/request/plans
    ```
 
-5. The server is now ready to use at the `PORT` you choose
+5. The server is now ready to use at the `PORT` you choose.
 
 ### Note
 
-_This file is for distribution and not included source code_
+_This file is for distribution and not included source code._
 
 For the source code please visit [here](https://github.com/beam41/204321-204361-Project-Server).
 
