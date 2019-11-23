@@ -102,4 +102,4 @@ _This file is for development and its very big!_
 
 For the distribution branch please visit [here](https://github.com/beam41/204321-204361-Project-Server/tree/distribution).
 
-For the front end source code please visit [here](https://github.com/khunpoom/204321-204361-Project-Client).
+For the frontend source code please visit [here](https://github.com/khunpoom/204321-204361-Project-Client).
