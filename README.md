@@ -41,7 +41,7 @@ This project is for CS students to track their grade and immediatly contact adis
 
    4.2 To populate the database with **real** api just type api path in `REGURL` the api should have HTTP method `GET` and
 
-   ```json
+   ```
    '/users' path should send body like this:
       [
          {
