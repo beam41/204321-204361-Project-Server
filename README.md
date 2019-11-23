@@ -1,4 +1,4 @@
-# Plan.G server
+# Plan.G Server
 
 ## Purpose
 
