@@ -22,7 +22,10 @@ export default function chat(io: socketio.Server): void {
     })
 
     socket.on("msgTo", async obj => {
-      io.to(`${await mapping(obj.username)}`).emit("msg", obj.message)
+      const mapped: any[] = await mapping(obj.username)
+      mapped.forEach(val => {
+        io.to(`${val.SocketId}`).emit("msg", obj.message)
+      })
     })
 
     socket.on("disconnect", () =>

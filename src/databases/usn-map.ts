@@ -19,9 +19,10 @@ export function runDB() {
   dbMem.run(
     `
   CREATE TABLE IF NOT EXISTS MAP (
-    Username     TEXT  NOT NULL  UNIQUE,
+    Id        INTEGER NOT NULL UNIQUE,
+    Username  TEXT  NOT NULL,
     SocketId  INTEGER,
-    PRIMARY KEY (Username)
+    PRIMARY KEY (Id)
   );
   `,
     err => {
@@ -33,7 +34,7 @@ export function runDB() {
 export function insertNew(Username: string, SocketId: string): void {
   dbMem.run(
     `
-    INSERT OR REPLACE INTO MAP
+    INSERT OR REPLACE INTO MAP (Username, SocketId)
     VALUES ('${Username}', '${SocketId}')`,
     err => {
       if (err) console.error(colors.red(err.message))
@@ -41,10 +42,10 @@ export function insertNew(Username: string, SocketId: string): void {
   )
 }
 
-export async function mapping(Username: string): Promise<string> {
-  let found = ""
+export async function mapping(Username: string): Promise<any[]> {
+  let found = []
   await new Promise((resolve, reject) =>
-    dbMem.get(
+    dbMem.all(
       `
     SELECT  SocketId
     FROM    MAP
@@ -56,7 +57,7 @@ export async function mapping(Username: string): Promise<string> {
       },
     ),
   ).then((value: any) => {
-    if (value) found = value.SocketId
+    if (value) found = value
   })
   return found
 }
