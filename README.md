@@ -96,4 +96,4 @@ _This file is for distribution and not included source code._
 
 For the source code please visit [here](https://github.com/beam41/204321-204361-Project-Server).
 
-For the front end source code please visit [here](https://github.com/khunpoom/204321-204361-Project-Client).
+For the frontend source code please visit [here](https://github.com/khunpoom/204321-204361-Project-Client).
